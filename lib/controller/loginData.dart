@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginData extends GetxController {
   RxList<String> email = <String>[].obs;
   RxList<String> password = <String>[].obs;
   RxBool pass = true.obs;
+
+  @override
+  void onInit() {
+    _getData();
+    super.onInit();
+  }
+
+  _setData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('email', email);
+    await prefs.setStringList('password', password);
+  }
+
+  _getData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    email.value = prefs.getStringList('email') ?? <String>[];
+    password.value = prefs.getStringList('password') ?? <String>[];
+  }
 
   void createAccount(
       {required String userEmail, required String userPassword}) {
@@ -13,7 +32,7 @@ class LoginData extends GetxController {
     } else {
       email.add(userEmail);
       password.add(userPassword);
-
+      _setData();
       Get.defaultDialog(
           actions: [
             MaterialButton(
