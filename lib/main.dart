@@ -35,93 +35,95 @@ class _MyHomeState extends State<MyHome> {
         centerTitle: true,
         title: Text('Login page'),
       ),
-      body: Column(
-        children: [
-          Image.asset('assets/images/login.png'),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: _emailController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Field is empty';
-                      } else if (value.length <= 5) {
-                        return 'email length must be greater than 5';
-                      }
-                    },
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.email),
-                      hintText: 'Enter an email',
-                      labelText: 'Email',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset('assets/images/login.png'),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: _emailController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Field is empty';
+                        } else if (value.length <= 5) {
+                          return 'email length must be greater than 5';
+                        }
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.email),
+                        hintText: 'Enter an email',
+                        labelText: 'Email',
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Obx(() => TextFormField(
-                        obscureText: controller.pass.value,
-                        controller: _passwordController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Field is empty';
-                          } else if (value.length <= 5) {
-                            return 'password length must be greater than 5';
-                          }
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            icon: Icon(controller.pass.value
-                                ? Icons.security
-                                : Icons.remove_red_eye),
-                            onPressed: () {
-                              controller.pass.value = !controller.pass.value;
-                            },
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Obx(() => TextFormField(
+                          obscureText: controller.pass.value,
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Field is empty';
+                            } else if (value.length <= 5) {
+                              return 'password length must be greater than 5';
+                            }
+                          },
+                          decoration: InputDecoration(
+                            prefixIcon: IconButton(
+                              icon: Icon(controller.pass.value
+                                  ? Icons.security
+                                  : Icons.remove_red_eye),
+                              onPressed: () {
+                                controller.pass.value = !controller.pass.value;
+                              },
+                            ),
+                            hintText: 'Enter an password',
+                            labelText: 'Password',
                           ),
-                          hintText: 'Enter an password',
-                          labelText: 'Password',
-                        ),
-                      )),
-                ),
-              ],
+                        )),
+                  ),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 50),
-          MaterialButton(
-            height: 40,
-            minWidth: 140,
-            color: Colors.blue,
-            onPressed: () {
-              _login();
-            },
-            child: Text(
-              'Login',
-              textScaleFactor: 1.3,
+            SizedBox(height: 50),
+            MaterialButton(
+              height: 40,
+              minWidth: 140,
+              color: Colors.blue,
+              onPressed: () {
+                _login();
+              },
+              child: Text(
+                'Login',
+                textScaleFactor: 1.3,
+              ),
             ),
-          ),
-          SizedBox(height: 10),
-          MaterialButton(
-            height: 40,
-            minWidth: 140,
-            color: Colors.green,
-            onPressed: _createAccount,
-            child: Text(
-              'Create Account',
-              textScaleFactor: 1.3,
+            SizedBox(height: 10),
+            MaterialButton(
+              height: 40,
+              minWidth: 140,
+              color: Colors.green,
+              onPressed: _createAccount,
+              child: Text(
+                'Create Account',
+                textScaleFactor: 1.3,
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: _forgot,
-            child: Text(
-              'forgot Password ?',
-              style: TextStyle(color: Colors.red),
-              textScaleFactor: 1.3,
-            ),
-          )
-        ],
+            TextButton(
+              onPressed: _forgot,
+              child: Text(
+                'forgot Password ?',
+                style: TextStyle(color: Colors.red),
+                textScaleFactor: 1.3,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
