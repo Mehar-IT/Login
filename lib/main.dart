@@ -131,6 +131,7 @@ class _MyHomeState extends State<MyHome> {
       if (controller.password.contains(_passwordController.text) &&
           controller.email.contains(_emailController.text)) {
         Get.to(() => HomePage(
+              email: _emailController.text,
               reset: () {
                 _emailController.clear();
                 _passwordController.clear();
@@ -140,15 +141,18 @@ class _MyHomeState extends State<MyHome> {
         Get.defaultDialog(
             title: 'Alas!!!!', content: Text('Email/Password is incorrect'));
       }
+      _formKey.currentState!.reset();
     }
   }
 
   void _createAccount() {
     Get.to(() => CreateAccount());
     controller.pass.value = true;
+    _formKey.currentState!.reset();
   }
 
   void _forgot() {
     Get.to(() => ForgotPassword());
+    _formKey.currentState!.reset();
   }
 }
