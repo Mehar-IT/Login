@@ -37,6 +37,13 @@ class ForgotPassword extends StatelessWidget {
               textScaleFactor: 1.3,
               style: TextStyle(color: Colors.white),
             ),
+          ),
+          MaterialButton(
+            onPressed: () {
+              Get.back();
+            },
+            color: Colors.red,
+            child: Text('Cancel'),
           )
         ],
       ),

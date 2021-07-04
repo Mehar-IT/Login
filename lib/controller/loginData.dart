@@ -54,13 +54,52 @@ class LoginData extends GetxController {
   void forgotPassword({required String userEmail}) {
     if (email.contains(userEmail)) {
       Get.defaultDialog(
-          title: 'Password',
-          content:
-              Text('your password is ${password[email.indexOf(userEmail)]}'));
+        title: 'Password',
+        content: Text('your password is ${password[email.indexOf(userEmail)]}'),
+        actions: [
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(22.0)),
+            onPressed: () {
+              Get.back();
+              Get.back();
+            },
+            child: Text('Ok'),
+            color: Colors.blue,
+          )
+        ],
+      );
     } else {
       Get.defaultDialog(
           title: 'Error 404',
           content: Text('Sorry no account is avalaible with this name'));
+    }
+  }
+
+  void deleteAccount(
+      {required String userEmail, required String userPassword}) {
+    if (email.contains(userEmail) && password.contains(userPassword)) {
+      email.removeAt(email.indexOf(userEmail));
+      password.removeAt(password.indexOf(userPassword));
+      Get.defaultDialog(
+        title: 'Congrats',
+        content: Text('Your Account successfully deleted'),
+        actions: [
+          MaterialButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(22.0)),
+            onPressed: () {
+              Get.back();
+              Get.back();
+            },
+            child: Text('Ok'),
+            color: Colors.blue,
+          )
+        ],
+      );
+    } else {
+      Get.defaultDialog(
+          title: 'Error 404', content: Text('This email is not found'));
     }
   }
 }

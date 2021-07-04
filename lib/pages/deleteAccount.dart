@@ -1,31 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login/controller/loginData.dart';
-import 'package:login/pages/createAccount.dart';
-import 'package:login/pages/deleteAccount.dart';
-import 'pages/forgotPassword.dart';
-import 'pages/homepage.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Login Page',
-      home: MyHome(),
-    );
-  }
-}
-
-class MyHome extends StatefulWidget {
-  @override
-  _MyHomeState createState() => _MyHomeState();
-}
-
-class _MyHomeState extends State<MyHome> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class DeleteAccount extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _emailController = TextEditingController();
   final controller = Get.put(LoginData());
@@ -34,12 +12,12 @@ class _MyHomeState extends State<MyHome> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Login page'),
+        title: Text('Create Account'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.asset('assets/images/login.png'),
+            Image.asset('assets/images/login3.png'),
             Form(
               key: _formKey,
               child: Column(
@@ -91,81 +69,32 @@ class _MyHomeState extends State<MyHome> {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(
+              height: 20,
+            ),
             MaterialButton(
-              height: 40,
-              minWidth: 140,
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  controller.deleteAccount(
+                      userEmail: _emailController.text,
+                      userPassword: _passwordController.text);
+
+                  controller.pass.value = true;
+                }
+              },
               color: Colors.blue,
-              onPressed: () {
-                _login();
-              },
-              child: Text(
-                'Login',
-                textScaleFactor: 1.3,
-              ),
-            ),
-            SizedBox(height: 10),
-            MaterialButton(
-              height: 40,
-              minWidth: 140,
-              color: Colors.green,
-              onPressed: _createAccount,
-              child: Text(
-                'Create Account',
-                textScaleFactor: 1.3,
-              ),
-            ),
-            TextButton(
-              onPressed: _forgot,
-              child: Text(
-                'forgot Password ?',
-                style: TextStyle(color: Colors.purple),
-                textScaleFactor: 1.3,
-              ),
-            ),
-            MaterialButton(
-              color: Colors.red,
-              onPressed: () {
-                _deleteAccount();
-              },
               child: Text('Delete Account'),
             ),
+            MaterialButton(
+              onPressed: () {
+                Get.back();
+              },
+              color: Colors.red,
+              child: Text('Cancel'),
+            )
           ],
         ),
       ),
     );
-  }
-
-  void _login() {
-    if (_formKey.currentState!.validate()) {
-      if (controller.password.contains(_passwordController.text) &&
-          controller.email.contains(_emailController.text)) {
-        Get.to(() => HomePage(
-              email: _emailController.text,
-              reset: () {
-                _emailController.clear();
-                _passwordController.clear();
-              },
-            ));
-      } else {
-        Get.defaultDialog(
-            title: 'Alas!!!!', content: Text('Email/Password is incorrect'));
-      }
-    }
-  }
-
-  void _createAccount() {
-    Get.to(() => CreateAccount());
-    controller.pass.value = true;
-    _formKey.currentState!.reset();
-  }
-
-  void _forgot() {
-    Get.to(() => ForgotPassword());
-    _formKey.currentState!.reset();
-  }
-
-  void _deleteAccount() {
-    Get.to(() => DeleteAccount());
   }
 }
