@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   final VoidCallback reset;
+  final ValueGetter image;
   final String email;
 
-  HomePage({Key? key, required this.email, required this.reset})
+  HomePage(
+      {Key? key, required this.email, required this.reset, required this.image})
       : super(key: key);
 
   @override
@@ -30,10 +33,18 @@ class HomePage extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('We are welcomming you!!!', textScaleFactor: 1.5),
+              Text('We are welcomming you!!!', textScaleFactor: 2.5),
+              SizedBox(height: 50),
+              ClipOval(
+                child: FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/unknown.png',
+                  image: image(),
+                ),
+              ),
+              SizedBox(height: 50),
               Text(
                 '$email',
-                textScaleFactor: 1.5,
+                textScaleFactor: 2.0,
                 style:
                     TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
               )

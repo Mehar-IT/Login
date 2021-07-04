@@ -15,6 +15,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Login Page',
       home: MyHome(),
+      // initialRoute: 'home',
+      // routes: {'home': (context) => HomePage()},
     );
   }
 }
@@ -142,6 +144,12 @@ class _MyHomeState extends State<MyHome> {
           controller.email.contains(_emailController.text)) {
         Get.to(() => HomePage(
               email: _emailController.text,
+              image: () {
+                int i = controller.email.indexOf(_emailController.text);
+                String imageUrl =
+                    'https://picsum.photos/id/' + '${i.toInt()}' + '/225/225';
+                return imageUrl;
+              },
               reset: () {
                 _emailController.clear();
                 _passwordController.clear();
