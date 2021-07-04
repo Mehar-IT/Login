@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:login/controller/loginData.dart';
-import 'package:login/createAccount.dart';
-import 'forgotPassword.dart';
-import 'homepage.dart';
+import 'package:login/pages/createAccount.dart';
+import 'pages/forgotPassword.dart';
+import 'pages/homepage.dart';
 
 void main() => runApp(MyApp());
 
@@ -135,15 +135,13 @@ class _MyHomeState extends State<MyHome> {
         Get.to(() => HomePage(
               email: _emailController.text,
               reset: () {
-                _emailController.clear();
-                _passwordController.clear();
+                _formKey.currentState!.reset();
               },
             ));
       } else {
         Get.defaultDialog(
             title: 'Alas!!!!', content: Text('Email/Password is incorrect'));
       }
-      _formKey.currentState!.reset();
     }
   }
 
