@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:http/http.dart' as http;
+import 'package:login/main.dart';
 
 class HomePage extends StatelessWidget {
   final VoidCallback reset;
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             onPressed: () {
               reset();
-              Get.back();
+              Get.offAll(() => MyHome());
             },
             icon: Icon(Icons.logout),
           )
@@ -39,6 +39,8 @@ class HomePage extends StatelessWidget {
                 child: FadeInImage.assetNetwork(
                   placeholder: 'assets/images/unknown.png',
                   image: image(),
+                  height: 225,
+                  width: 225,
                 ),
               ),
               SizedBox(height: 50),

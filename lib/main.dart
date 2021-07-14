@@ -142,12 +142,11 @@ class _MyHomeState extends State<MyHome> {
     if (_formKey.currentState!.validate()) {
       if (controller.password.contains(_passwordController.text) &&
           controller.email.contains(_emailController.text)) {
-        Get.to(() => HomePage(
+        Get.off(() => HomePage(
               email: _emailController.text,
               image: () {
                 int i = controller.email.indexOf(_emailController.text);
-                String imageUrl =
-                    'https://picsum.photos/id/' + '${i.toInt()}' + '/225/225';
+                String imageUrl = 'https://picsum.photos/id/$i/225/225';
                 return imageUrl;
               },
               reset: () {
