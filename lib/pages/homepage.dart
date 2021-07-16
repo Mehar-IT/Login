@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:login/main.dart';
+import 'loginpage.dart';
 
 class HomePage extends StatelessWidget {
   final VoidCallback reset;
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
           IconButton(
             onPressed: () {
               reset();
-              Get.offAll(() => MyHome());
+              Get.offAll(() => MyLoginPage());
             },
             icon: Icon(Icons.logout),
           )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:login/pages/homepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginData extends GetxController {
@@ -48,6 +49,28 @@ class LoginData extends GetxController {
           ],
           title: 'Congrats!!!',
           content: Text('you have successfully created an account'));
+    }
+  }
+
+  void login(TextEditingController passwordController,
+      TextEditingController emailController) {
+    if (password.contains(passwordController.text) &&
+        email.contains(emailController.text)) {
+      Get.off(() => HomePage(
+            email: emailController.text,
+            image: () {
+              int i = email.indexOf(emailController.text);
+              String imageUrl = 'https://picsum.photos/id/$i/225/225';
+              return imageUrl;
+            },
+            reset: () {
+              emailController.clear();
+              passwordController.clear();
+            },
+          ));
+    } else {
+      Get.defaultDialog(
+          title: 'Alas!!!!', content: Text('Email/Password is incorrect'));
     }
   }
 
